@@ -6,9 +6,9 @@
 local M = {}
 
 M.base46 = {
-    theme = "doomchad",
-    transparency = false,
-    theme_toggle = { "doomchad", "bearded-arc" },
+    theme = "bearded-arc",
+    transparency = true,
+    theme_toggle = { "bearded-arc", "flouromachine" },
     hl_override = {
         Comment = { italic = true },
         ["@comment"] = { italic = true },
@@ -24,23 +24,30 @@ M.base46 = {
             bg = "#c94343",
             fg = "none",
         },
+        NvimTreeWinSeparator = {
+            bg = "NONE",
+            fg = "line",
+        },
     },
 }
 
 M.nvdash = { load_on_startup = true }
 M.ui = {
     cmp = {
-        style = "default",
+        style = "atom_colored",
+
         format_colors = {
             tailwind = true,
+            icon = "󱓻󱓻",
         },
     },
     telescope = {
         style = "borderless",
     },
     statusline = {
+        theme = "minimal",
         enabled = true,
-        separator_style = "arrow",
+        separator_style = "block",
     },
     tabufline = {
         enabled = true,

@@ -1,19 +1,13 @@
+-- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "emmet_language_server", "ts_ls" }
+-- EXAMPLE
+local servers = { "html", "cssls", "ts_ls", "emmet_language_server" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
-nvlsp.defaults()
-
-local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
--- lspconfig initialization on default configuration of lsp server
+-- lsps with default config
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = nvlsp.on_attach,
@@ -21,6 +15,14 @@ for _, lsp in ipairs(servers) do
         capabilities = nvlsp.capabilities,
     }
 end
+
+-- Single Server Setups
+
+lspconfig.ts_ls.setup {
+    on_attach = nvlsp.on_attach,
+    on_init = nvlsp.on_init,
+    capabilities = nvlsp.capabilities,
+}
 
 lspconfig.emmet_language_server.setup {
     filetypes = {
@@ -35,8 +37,6 @@ lspconfig.emmet_language_server.setup {
         "pug",
         "typescriptreact",
     },
-    -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
-    -- **Note:** only the options listed in the table are supported.
     init_options = {
         ---@type table<string, string>
         includeLanguages = {},
@@ -56,20 +56,5 @@ lspconfig.emmet_language_server.setup {
         syntaxProfiles = {},
         --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
         variables = {},
-    },
-}
-
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
---
-lspconfig.ts_ls.setup {
-    init_options = {
-        preferences = {
-            disableSuggestions = true,
-        },
     },
 }
