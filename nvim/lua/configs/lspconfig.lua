@@ -17,11 +17,18 @@ for _, lsp in ipairs(servers) do
 end
 
 -- Single Server Setups
+-- for multiple configurations
 
 lspconfig.ts_ls.setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
+    init_options = {
+        preferences = {
+            disableSuggestions = true,
+        },
+    },
+    filetypes = {
+        "javascript",
+        "typescript",
+    },
 }
 
 lspconfig.emmet_language_server.setup {

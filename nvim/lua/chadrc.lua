@@ -6,9 +6,9 @@
 local M = {}
 
 M.base46 = {
-    theme = "bearded-arc",
+    theme = "gruvbox",
     transparency = true,
-    theme_toggle = { "bearded-arc", "flouromachine" },
+    theme_toggle = { "bearded-arc", "gruvbox" },
     hl_override = {
         Comment = { italic = true },
         ["@comment"] = { italic = true },
@@ -38,7 +38,6 @@ M.ui = {
 
         format_colors = {
             tailwind = true,
-            icon = "󱓻󱓻",
         },
     },
     telescope = {
@@ -51,7 +50,9 @@ M.ui = {
     },
     tabufline = {
         enabled = true,
+        show_close_button = true,
         lazyload = true,
+        order = { "treeOffset", "buffers", "tabs", "btns" },
     },
 
     term = {
